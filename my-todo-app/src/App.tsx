@@ -1,35 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import type { Todo } from "./types/todo";
+import TodoList from "./components/TodoList";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [todos, setTodos] = useState<Todo[]>([]);
+    const [title, setTitle] = useState("");
+    const [text, setText] = useState("");
+    const [dueDate, setDueDate] = useState("");
+    const [priority, setPriority] = useState<"low" | "medium" | "high">("low");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const addTodo = () => {
+        if (!title.trim()) return;
+
+        const now = new Date().toISOString();
+        const newTodo: Todo = {
+            id: Date.now(),
+            title,
+            text,
+            completed: false,
+            createdAt: now,
+            updatedAt: now,
+            dueDate: dueDate || undefined,
+            priority: priority,
+        };
+
+        setTodos((prev) => [...prev, newTodo]);
+        setTitle("");
+        setText("");
+        setDueDate("");
+        setPriority("low");
+    };
+    return (
+        <div className="max-w-xl mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-4">My Todo App</h1>
+            <div className="flex flex-col gap-2 mb-6">
+                <input
+                    className="border p-2 rounded"
+                    placeholder="할 일"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <textarea
+                    className="border p-2 rounded"
+                    placeholder="Description (Optional)"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
+                <input
+                    type="date"
+                    className="border p-2 rounded"
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
+                />
+                <select
+                    className="border p-2 rounded"
+                    value={priority}
+                    onChange={(e) =>
+                        setPriority(e.target.value as "low" | "medium" | "high")
+                    }
+                >
+                    <option value="low">낮음</option>
+                    <option value="medium">중간</option>
+                    <option value="high">높음</option>
+                </select>
+                <button
+                    className=" bg-slate-500 text-white p-4 rounded hover:bg-slate-600"
+                    onClick={addTodo}
+                >
+                    추가하기
+                </button>
+            </div>
+
+            <TodoList todos={todos} />
+        </div>
+    );
 }
-
-export default App
+export default App;
