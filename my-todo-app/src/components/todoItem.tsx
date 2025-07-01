@@ -15,19 +15,23 @@ export default function TodoItem({ todo, onToggle }: TodoItemProps) {
             }`}
         >
             <div className="flex justify-between items-start mb-1">
-                <div className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        checked={completed}
-                        onChange={() => onToggle(todo.id)}
-                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                    />
-                    <h2 className="text-lg font-semibold">{title}</h2>
+                <div className="flex items-start gap-2">
+                    <div className="pt-1">
+                        <input
+                            type="checkbox"
+                            checked={completed}
+                            onChange={() => onToggle(todo.id)}
+                            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        />
+                    </div>
+                    <h2 className="text-lg font-semibold leading-tight">
+                        {title}
+                    </h2>
                 </div>
 
                 {priority && (
                     <span
-                        className={` ml-2 mt-1 text-xs px-2 py-1 rounded ${
+                        className={` ml-2 mt-1 pt-1 text-xs px-2 py-1 rounded ${
                             priority === "high"
                                 ? "bg-red-500 text-white"
                                 : priority === "medium"

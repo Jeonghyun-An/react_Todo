@@ -35,35 +35,35 @@ function App() {
             <h1 className="text-2xl font-bold mb-4">My Todo App</h1>
             <div className="flex flex-col gap-2 mb-6">
                 <input
-                    className="border p-2 rounded"
+                    className="border  p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300"
                     placeholder="할 일"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <textarea
-                    className="border p-2 rounded"
+                    className="border p-2 rounded resize-none focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300"
                     placeholder="Description (Optional)"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                 />
                 <div className="flex gap-16">
                     <div className="flex-1 flex items-center gap-6">
-                        <p className="text-slate-600 whitespace-nowrap w-12">
+                        <p className="text-slate-700 whitespace-nowrap w-12">
                             마감일
                         </p>
                         <input
                             type="date"
-                            className="w-full border p-2 rounded"
+                            className="w-full border p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:bg-slate-50"
                             value={dueDate}
                             onChange={(e) => setDueDate(e.target.value)}
                         />
                     </div>
                     <div className="flex-1 flex items-center gap-6">
-                        <p className="text-slate-600 whitespace-nowrap w-12">
+                        <p className="text-slate-700 whitespace-nowrap w-12 ">
                             중요도
                         </p>
                         <select
-                            className="w-full border p-2 rounded"
+                            className="w-full border p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:bg-slate-50"
                             value={priority}
                             onChange={(e) =>
                                 setPriority(
@@ -79,7 +79,7 @@ function App() {
                 </div>
 
                 <button
-                    className=" bg-slate-600 text-white p-4 rounded-lg hover:bg-slate-500"
+                    className=" bg-slate-700 text-white p-4 rounded-lg hover:bg-slate-600"
                     onClick={addTodo}
                 >
                     추가하기
