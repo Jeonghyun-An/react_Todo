@@ -79,7 +79,7 @@ function App() {
                 </div>
 
                 <button
-                    className=" bg-slate-600 text-white p-4 rounded hover:bg-slate-500"
+                    className=" bg-slate-600 text-white p-4 rounded-lg hover:bg-slate-500"
                     onClick={addTodo}
                 >
                     추가하기
