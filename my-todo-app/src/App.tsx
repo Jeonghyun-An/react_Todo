@@ -86,9 +86,24 @@ function App() {
                 </button>
             </div>
             <div className="flex-1 overflow-y-auto">
-                <TodoList todos={todos} />
+                <TodoList todos={todos} onToggle={toggleTodo} />
             </div>
         </div>
     );
+
+    function toggleTodo(id: number) {
+        setTodos((prev) =>
+            prev.map((todo) =>
+                todo.id === id
+                    ? {
+                          ...todo,
+                          completed: !todo.completed,
+                          updatedAt: new Date().toISOString(),
+                      }
+                    : todo
+            )
+        );
+    }
 }
+
 export default App;
