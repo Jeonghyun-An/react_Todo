@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Todo } from "./types/todo";
 import TodoList from "./components/todoList";
+
+const STORAGE_KEY = "my_todo_app_todos";
 
 function App() {
     const [todos, setTodos] = useState<Todo[]>([]);
@@ -8,6 +10,16 @@ function App() {
     const [text, setText] = useState("");
     const [dueDate, setDueDate] = useState("");
     const [priority, setPriority] = useState<"low" | "medium" | "high">("low");
+
+    useEffect(() => {
+        const storedTodos = localStorage.getItem(STORAGE_KEY);
+        if (storedTodos) {
+            setTodos(JSON.parse(storedTodos));
+        }
+    }, []);
+    useEffect(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+    }, [todos]);
 
     const addTodo = () => {
         if (!title.trim()) return;
@@ -96,6 +108,7 @@ function App() {
                     <TodoList
                         todos={todos.filter((todo) => !todo.completed)}
                         onToggle={toggleTodo}
+                        onDelete={deleteTodo}
                     />
                     <hr className="my-4" />
                     <h2 className="text-lg font-semibold text-slate-700 mb-2">
@@ -104,6 +117,7 @@ function App() {
                     <TodoList
                         todos={todos.filter((todo) => todo.completed)}
                         onToggle={toggleTodo}
+                        onDelete={deleteTodo}
                     />
                 </div>
             </div>
@@ -122,6 +136,10 @@ function App() {
                     : todo
             )
         );
+    }
+
+    function deleteTodo(id: number) {
+        setTodos((prev) => prev.filter((todo) => todo.id !== id));
     }
 }
 

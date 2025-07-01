@@ -3,9 +3,10 @@ import type { Todo } from "../types/todo";
 interface TodoItemProps {
     todo: Todo;
     onToggle: (id: number) => void;
+    onDelete: (id: number) => void;
 }
 
-export default function TodoItem({ todo, onToggle }: TodoItemProps) {
+export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
     const { title, text, completed, dueDate, priority } = todo;
 
     return (
@@ -44,7 +45,17 @@ export default function TodoItem({ todo, onToggle }: TodoItemProps) {
                 )}
             </div>
             {text && <p className="text-sm text-gray-700">{text}</p>}
-            {dueDate && <p className="text-xs text-gray-500 mt-1">{dueDate}</p>}
+            <div className="flex justify-between items-center mt-1">
+                {dueDate && (
+                    <p className="flex text-xs text-gray-500 mt-1">{dueDate}</p>
+                )}
+                <button
+                    onClick={() => onDelete(todo.id)}
+                    className="flex ml-auto text-slate-400 text-xs  hover:underline hover:text-slate-500 "
+                >
+                    삭제
+                </button>
+            </div>
         </li>
     );
 }
