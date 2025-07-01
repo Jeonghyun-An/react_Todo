@@ -13,11 +13,11 @@ export default function TodoItem({ todo }: TodoItemProps) {
                 completed ? "bg-slate-200" : "bg-white"
             }`}
         >
-            <div className="flex justify-between items-center mb-1">
+            <div className="flex justify-between items-start mb-1">
                 <h2 className="text-lg font-semibold">{title}</h2>
                 {priority && (
                     <span
-                        className={`text-xs px-2 py-1 rounded ${
+                        className={` ml-2 mt-1 text-xs px-2 py-1 rounded ${
                             priority === "high"
                                 ? "bg-red-500 text-white"
                                 : priority === "medium"

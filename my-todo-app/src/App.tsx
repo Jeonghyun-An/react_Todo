@@ -31,7 +31,7 @@ function App() {
         setPriority("low");
     };
     return (
-        <div className="max-w-xl mx-auto p-4">
+        <div className="h-screen max-w-xl mx-auto p-4 flex flex-col">
             <h1 className="text-2xl font-bold mb-4">My Todo App</h1>
             <div className="flex flex-col gap-2 mb-6">
                 <input
@@ -85,8 +85,9 @@ function App() {
                     추가하기
                 </button>
             </div>
-
-            <TodoList todos={todos} />
+            <div className="flex-1 overflow-y-auto">
+                <TodoList todos={todos} />
+            </div>
         </div>
     );
 }
