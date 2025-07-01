@@ -31,65 +31,70 @@ function App() {
         setPriority("low");
     };
     return (
-        <div className="h-screen max-w-2xl mx-auto p-4 flex flex-col">
-            <h1 className="text-2xl font-bold mb-4">My Todo App</h1>
-            <div className="flex flex-col gap-2 mb-6">
-                <input
-                    className="border  p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300"
-                    placeholder="할 일"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                <textarea
-                    className="border p-2 rounded resize-none focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300"
-                    placeholder="Description (Optional)"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                />
-                <div className="flex gap-16">
-                    <div className="flex-1 flex items-center gap-6">
-                        <p className="text-slate-700 whitespace-nowrap w-12">
-                            마감일
-                        </p>
-                        <input
-                            type="date"
-                            className="w-full border p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:bg-slate-50"
-                            value={dueDate}
-                            onChange={(e) => setDueDate(e.target.value)}
-                        />
+        <div className="h-screen bg-slate-50">
+            <div className="h-full max-w-2xl mx-auto p-4 flex flex-col">
+                <h1 className="text-2xl font-bold mb-4">My Todo App</h1>
+                <div className="flex flex-col gap-2 mb-6">
+                    <input
+                        className="border  p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300"
+                        placeholder="할 일"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <textarea
+                        className="border p-2 rounded resize-none focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300"
+                        placeholder="Description (Optional)"
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                    />
+                    <div className="flex gap-16">
+                        <div className="flex-1 flex items-center gap-6">
+                            <p className="text-slate-700 whitespace-nowrap w-12">
+                                마감일
+                            </p>
+                            <input
+                                type="date"
+                                className="w-full border p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300"
+                                value={dueDate}
+                                onChange={(e) => setDueDate(e.target.value)}
+                            />
+                        </div>
+                        <div className="flex-1 flex items-center gap-6">
+                            <p className="text-slate-700 whitespace-nowrap w-12 ">
+                                중요도
+                            </p>
+                            <select
+                                className="w-full border p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:border-slate-300 hover:cursor-pointer"
+                                value={priority}
+                                onChange={(e) =>
+                                    setPriority(
+                                        e.target.value as
+                                            | "low"
+                                            | "medium"
+                                            | "high"
+                                    )
+                                }
+                            >
+                                <option value="low">낮음</option>
+                                <option value="medium">중간</option>
+                                <option value="high">높음</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="flex-1 flex items-center gap-6">
-                        <p className="text-slate-700 whitespace-nowrap w-12 ">
-                            중요도
-                        </p>
-                        <select
-                            className="w-full border p-2 rounded focus:outline-none focus:ring-slate-400 focus:ring-1 focus:border-slate-400 hover:bg-slate-50"
-                            value={priority}
-                            onChange={(e) =>
-                                setPriority(
-                                    e.target.value as "low" | "medium" | "high"
-                                )
-                            }
-                        >
-                            <option value="low">낮음</option>
-                            <option value="medium">중간</option>
-                            <option value="high">높음</option>
-                        </select>
-                    </div>
-                </div>
 
-                <button
-                    className=" bg-slate-700 text-white p-4 rounded-lg hover:bg-slate-600"
-                    onClick={addTodo}
+                    <button
+                        className=" bg-slate-700 text-white p-4 rounded-lg hover:bg-slate-600"
+                        onClick={addTodo}
+                    >
+                        추가하기
+                    </button>
+                </div>
+                <div
+                    className="flex-1 overflow-y-auto ml-4"
+                    style={{ scrollbarGutter: "stable" }}
                 >
-                    추가하기
-                </button>
-            </div>
-            <div
-                className="flex-1 overflow-y-auto ml-4"
-                style={{ scrollbarGutter: "stable" }}
-            >
-                <TodoList todos={todos} onToggle={toggleTodo} />
+                    <TodoList todos={todos} onToggle={toggleTodo} />
+                </div>
             </div>
         </div>
     );
