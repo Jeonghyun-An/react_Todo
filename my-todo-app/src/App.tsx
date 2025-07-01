@@ -110,15 +110,19 @@ function App() {
                         onToggle={toggleTodo}
                         onDelete={deleteTodo}
                     />
-                    <hr className="my-4" />
-                    <h2 className="text-lg font-semibold text-slate-700 mb-2">
-                        완료된 작업
-                    </h2>
-                    <TodoList
-                        todos={todos.filter((todo) => todo.completed)}
-                        onToggle={toggleTodo}
-                        onDelete={deleteTodo}
-                    />
+                    {todos.some((todo) => todo.completed) && (
+                        <>
+                            <hr className="my-8" />
+                            <h2 className="text-lg font-semibold text-slate-700 mb-2">
+                                완료된 작업
+                            </h2>
+                            <TodoList
+                                todos={todos.filter((todo) => todo.completed)}
+                                onToggle={toggleTodo}
+                                onDelete={deleteTodo}
+                            />
+                        </>
+                    )}
                 </div>
             </div>
         </div>
