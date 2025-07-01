@@ -93,7 +93,18 @@ function App() {
                     className="flex-1 overflow-y-auto ml-4"
                     style={{ scrollbarGutter: "stable" }}
                 >
-                    <TodoList todos={todos} onToggle={toggleTodo} />
+                    <TodoList
+                        todos={todos.filter((todo) => !todo.completed)}
+                        onToggle={toggleTodo}
+                    />
+                    <hr className="my-4" />
+                    <h2 className="text-lg font-semibold text-slate-700 mb-2">
+                        완료된 작업
+                    </h2>
+                    <TodoList
+                        todos={todos.filter((todo) => todo.completed)}
+                        onToggle={toggleTodo}
+                    />
                 </div>
             </div>
         </div>
