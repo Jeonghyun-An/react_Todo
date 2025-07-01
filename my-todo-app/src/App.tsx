@@ -46,25 +46,40 @@ function App() {
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                 />
-                <input
-                    type="date"
-                    className="border p-2 rounded"
-                    value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
-                />
-                <select
-                    className="border p-2 rounded"
-                    value={priority}
-                    onChange={(e) =>
-                        setPriority(e.target.value as "low" | "medium" | "high")
-                    }
-                >
-                    <option value="low">낮음</option>
-                    <option value="medium">중간</option>
-                    <option value="high">높음</option>
-                </select>
+                <div className="flex gap-16">
+                    <div className="flex-1 flex items-center gap-6">
+                        <p className="text-slate-600 whitespace-nowrap w-12">
+                            마감일
+                        </p>
+                        <input
+                            type="date"
+                            className="w-full border p-2 rounded"
+                            value={dueDate}
+                            onChange={(e) => setDueDate(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex-1 flex items-center gap-6">
+                        <p className="text-slate-600 whitespace-nowrap w-12">
+                            중요도
+                        </p>
+                        <select
+                            className="w-full border p-2 rounded"
+                            value={priority}
+                            onChange={(e) =>
+                                setPriority(
+                                    e.target.value as "low" | "medium" | "high"
+                                )
+                            }
+                        >
+                            <option value="low">낮음</option>
+                            <option value="medium">중간</option>
+                            <option value="high">높음</option>
+                        </select>
+                    </div>
+                </div>
+
                 <button
-                    className=" bg-slate-500 text-white p-4 rounded hover:bg-slate-600"
+                    className=" bg-slate-600 text-white p-4 rounded hover:bg-slate-500"
                     onClick={addTodo}
                 >
                     추가하기
